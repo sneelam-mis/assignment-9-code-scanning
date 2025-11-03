@@ -56,11 +56,13 @@ jobs:
     - name: Docker Scout Scan
       uses: docker/scout-action@v1
       with:
-        command: cves
-        image: pygoat_app:latest
-        to-sarif: true
-        sarif-file: scout-report.sarif
-        only-severities: critical,high
+          command: cves
+          image: pygoat_app:latest
+          format: sarif
+          sarif-file: scout-report.sarif
+          only-severities: critical,high
+          dockerhub-user: ${{ secrets.REPO_USER }}
+          dockerhub-password: ${{ secrets.REPO_PWD }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
